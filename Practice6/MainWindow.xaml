@@ -1,0 +1,106 @@
+﻿<Window x:Class="Practice6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practice6"
+        mc:Ignorable="d"
+        Title="Главное окно" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" IsVisibleChanged="Window_IsVisibleChanged">
+    <Window.Resources>
+        <Style x:Key="MainWindowTextBlock">
+            <Setter Property="TextBlock.FontFamily" Value="Impact"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="30"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="MainWindowButton">
+            <Setter Property="Button.FontFamily" Value="Impact"></Setter>
+            <Setter Property="Button.FontSize" Value="50"></Setter>
+            <Setter Property="Button.Foreground" Value="Black"></Setter>
+            <Setter Property="Button.Background" Value="#04AEC4"></Setter>
+            <Setter Property="Button.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Black"
+                            CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value="SaddleBrown"/>
+                    <Setter Property="Button.Foreground" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MainWindowTextBox">
+            <Setter Property="TextBox.FontFamily" Value="Impact"></Setter>
+            <Setter Property="TextBox.FontSize" Value="30"></Setter>
+            <Setter Property="TextBox.TextWrapping" Value="WrapWithOverflow"></Setter>
+            <Setter Property="TextBox.Background" Value="#04aec4f1"></Setter>
+            <Setter Property="TextBox.Padding" Value="3"></Setter>
+        </Style>
+        <Style x:Key="MainWindowBackground">
+            <Setter Property="Grid.Background" Value="Aqua"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Style="{StaticResource MainWindowBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51*"></RowDefinition>
+            <RowDefinition Height="94*"></RowDefinition>
+            <RowDefinition Height="180*"></RowDefinition>
+            <RowDefinition Height="109*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Height="30" VerticalAlignment="Top" Background="#079cb0">
+            <MenuItem Header="Файл">
+                <MenuItem x:Name="PdfBtn" Click="PdfBtn_OnClick" Header="Экспорт в .pdf">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/PDF.png" Stretch="Fill"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="ExitBtn" Click="ExitBtn_OnClick" Header="Выйти из учетной записи">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/logOut.png" Stretch="Fill"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="OrdersBtn" Click="OrdersBtn_OnClick" Header="Мероприятия"></MenuItem>
+            <MenuItem x:Name="DocumentsBtn" Click="DocumentsBtn_OnClick" Header="Документы"></MenuItem>
+        </Menu>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#079cb0" BorderThickness="2" CornerRadius="7" Grid.ColumnSpan="2" Margin="226,6,226,6">
+            <TextBlock Style="{StaticResource MainWindowTextBlock}" Text="Корреспонденты"></TextBlock>
+        </Border>
+
+        <DataGrid x:Name="DataBaseDG" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="6" AutoGenerateColumns="False" IsReadOnly="True" Background="#079cb0">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Width="*" Header="Уникальный номер" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Фамилия, имя и отчество" Binding="{Binding SurnameNameLastname}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Должность" Binding="{Binding Position}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Отдел" Binding="{Binding Division}"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="EditBtn" Click="EditBtn_OnClick">Изменить</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*"> 
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="DeleteBtn" Click="DeleteBtn_OnClick">Удалить</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddBtn" Click="AddBtn_OnClick" Grid.Row="3" Grid.ColumnSpan="2" Margin="6" FontSize="36" Style="{StaticResource MainWindowButton}">Добавить</Button>
+    </Grid>
+</Window>

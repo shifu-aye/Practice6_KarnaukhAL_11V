@@ -1,0 +1,84 @@
+﻿<Window x:Class="Practice6.Windows.AddEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practice6.Windows"
+        mc:Ignorable="d"
+        Title="Редактор корреспондента" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="AuthorizationTextBlock">
+            <Setter Property="TextBlock.FontFamily" Value="Impact"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="30"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="AuthorizationButton">
+            <Setter Property="Button.FontFamily" Value="Impact"></Setter>
+            <Setter Property="Button.FontSize" Value="50"></Setter>
+            <Setter Property="Button.Foreground" Value="Black"></Setter>
+            <Setter Property="Button.Background" Value="#04AEC4"></Setter>
+            <Setter Property="Button.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Black"
+                            CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value="SaddleBrown"/>
+                    <Setter Property="Button.Foreground" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AuthorizationTextBox">
+            <Setter Property="TextBox.FontFamily" Value="Impact"></Setter>
+            <Setter Property="TextBox.FontSize" Value="30"></Setter>
+            <Setter Property="TextBox.TextWrapping" Value="WrapWithOverflow"></Setter>
+            <Setter Property="TextBox.Background" Value="#04aec4f1"></Setter>
+            <Setter Property="TextBox.Padding" Value="3"></Setter>
+        </Style>
+        <Style x:Key="AuthorizationBackground">
+            <Setter Property="Grid.Background" Value="Aqua"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Style="{StaticResource AuthorizationBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="124*"></RowDefinition>
+            <RowDefinition Height="124*"></RowDefinition>
+            <RowDefinition Height="124*"></RowDefinition>
+            <RowDefinition Height="124*"></RowDefinition>
+            <RowDefinition Height="70*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBlock Style="{StaticResource AuthorizationTextBlock}" Height="36">ФИО:</TextBlock>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBlock Style="{StaticResource AuthorizationTextBlock}" Height="36">Должность:</TextBlock>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBlock Style="{StaticResource AuthorizationTextBlock}">Отдел:</TextBlock>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBox x:Name="NameTb" Text="{Binding SurnameNameLastname}" Style="{StaticResource AuthorizationTextBox}"/>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBox x:Name="PositionTb" Text="{Binding Position}"  Style="{StaticResource AuthorizationTextBox}"/>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Margin="6">
+            <TextBox x:Name="DivisionTb" Text="{Binding Division}" Style="{StaticResource AuthorizationTextBox}"/>
+        </Border>
+        <Button x:Name="AcceptBtn" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="6" Style="{StaticResource AuthorizationButton}" Click="AcceptBtn_OnClick">Принять</Button>
+        <Button x:Name="BackBtn" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="6" Style="{StaticResource AuthorizationButton}" FontSize="30" Click="BackBtn_OnClick">Назад</Button>
+    </Grid>
+</Window>
